@@ -1,4 +1,3 @@
-
 #define LED 13
 #define BUTTON 8
 int val = 0;
@@ -21,5 +20,5 @@ void loop() {
   else{
     digitalWrite(LED,LOW);
   }
-
+     //fai il codice delk buzzer qua              
 }

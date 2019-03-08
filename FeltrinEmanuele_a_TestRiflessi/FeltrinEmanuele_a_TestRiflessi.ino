@@ -19,22 +19,6 @@ void setup() {
   pinMode(bottone,INPUT);
   Serial.begin(9600);
 }
-void loop() {
-  // Vedo Se il pulsante è premuto
-  bottoneHIGH_o_LOW = digitalRead(bottone);
-  bool premuto = false;
-  while(!premuto){
-    if(bottoneHIGH_o_LOW == HIGH){
-      premuto = true;
-    }
-  }
-  risultatoRiflessiLed = ("Il tuo tempo di risposta col led è", ledDiPausa);
-  risultatoRiflessiBuzzer = ("Il tuo tempo di risposta col buzzer è", buzzer);
-               
-}
-
-
-
 int ProvaRiflessi(String testo, int led_o_buzzer)
 {
   delay(random(1000,5000));
@@ -52,4 +36,26 @@ int ProvaRiflessi(String testo, int led_o_buzzer)
   int TempoFinale = TempoFineProva - TempoInizioProva;
   Serial.println(testo + String (TempoFinale));
   return TempoFinale;  
+}
+void loop() {
+  // Vedo Se il pulsante è premuto
+  bottoneHIGH_o_LOW = digitalRead(bottone);
+  bool premuto = false;
+  while(!premuto){
+    if(bottoneHIGH_o_LOW == HIGH){
+      premuto = true;
+    }
+  }
+  risultatoRiflessiLed = ProvaRiflessi("Il tuo tempo di risposta col led è", ledDiPausa);
+  risultatoRiflessiBuzzer = ProvaRiflessi("Il tuo tempo di risposta col buzzer è", buzzer);
+  //guardo i risultati
+  if(risultatoRiflessiLed < 400 && risultatoRiflessiBuzzer < 400){
+    digitalWrite(ledVerde,HIGH);
+  }else{
+    digitalWrite(ledRosso,HIGH);
+  }
+  //metto un tempo per far vedere all'utente se ha vinto
+  delay(10000);
+  digitalWrite(ledVerde,LOW);
+  digitalWrite(ledRosso,LOW);              
 }

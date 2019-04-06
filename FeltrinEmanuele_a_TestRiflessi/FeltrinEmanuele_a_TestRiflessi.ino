@@ -19,6 +19,7 @@ void setup() {
   pinMode(bottone,INPUT);
   Serial.begin(9600);
 }
+//Metodo
 int ProvaRiflessi(String testo, int led_o_buzzer)
 {
   delay(random(1000,5000));
